@@ -44,3 +44,29 @@ function displayInput() {
     const display = document.querySelector('.calc-screen');
     display.value = calculator.displayValue;
 }
+
+const buttons = document.querySelector('.calc-buttons');
+buttons.addEventListener('click', (e) => {
+    const target = e.target;
+
+    if (!target.matches('button')) {
+        return;
+    }
+
+    if (target.classList.contains('operator')) {
+        console.log('operator', target.value);
+        return;
+    }
+
+    if (target.classList.contains('decimal')) {
+        console.log('decimal', target.value);
+        return;
+    }
+
+    if (target.classList.contains('clrbutton')) {
+        console.log('clear', target.value);
+        return;
+    }
+
+    console.log('digit', target.value);
+})

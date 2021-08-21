@@ -45,6 +45,11 @@ function displayInput() {
     display.value = calculator.displayValue;
 }
 
+function digitInputs(digit) {
+    const displayValue = calculator.displayValue;
+    calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+}
+
 const buttons = document.querySelector('.calc-buttons');
 buttons.addEventListener('click', (e) => {
     const target = e.target;
@@ -68,5 +73,6 @@ buttons.addEventListener('click', (e) => {
         return;
     }
 
-    console.log('digit', target.value);
+    digitInputs(target.value);
+    displayInput();
 })

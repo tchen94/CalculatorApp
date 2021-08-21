@@ -29,7 +29,7 @@ function operate(a, b, operator) {
     switch (operator) {
         case '+': 
             return add(a, b);
-        case '-': 
+        case '-':
             return subtract(a, b);
         case '*': 
             return multiply(a, b);
@@ -37,6 +37,8 @@ function operate(a, b, operator) {
             return divide(a, b);
         case '%': 
             return remainder(a, b);
+        default:
+            return b;
     }
 }
 
@@ -46,8 +48,16 @@ function displayInput() {
 }
 
 function digitInputs(digit) {
-    const { displayValue } = calculator;
-    calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+    const { displayValue, secondOperand } = calculator;
+
+    if (secondOperand === true) {
+        calculator.displayValue = digit;
+        calculator.secondOperand = false;
+    } else {
+        calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+    }
+    
+    console.log(calculator);
 }
 
 function addDecimal(period) {
@@ -57,11 +67,16 @@ function addDecimal(period) {
 }
 
 function operators(nextOperation) {
-    const { firstOperand, displayValue, operator } = calculator;
+    const { firstOperand, displayValue, operator } = calculator
     const input = parseFloat(displayValue);
 
     if (firstOperand === null && !isNaN(input)) {
         calculator.firstOperand = input;
+    } else if (operator) {
+        const result = operate(firstOperand, input, operator);
+
+        calculator.displayValue = String(result);
+        calculator.firstOperand = result;
     }
 
     calculator.secondOperand = true;

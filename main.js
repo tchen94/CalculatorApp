@@ -56,6 +56,18 @@ function addDecimal(period) {
     }
 }
 
+function operators(nextOperation) {
+    const { firstOperand, displayValue, operator } = calculator;
+    const input = parseFloat(displayValue);
+
+    if (firstOperand === null && !isNaN(input)) {
+        calculator.firstOperand = input;
+    }
+
+    calculator.secondOperand = true;
+    calculator.operator = nextOperation;
+}
+
 const buttons = document.querySelector('.calc-buttons');
 buttons.addEventListener('click', (e) => {
     const { target } = e;
@@ -65,7 +77,8 @@ buttons.addEventListener('click', (e) => {
     }
 
     if (target.classList.contains('operator')) {
-        console.log('operator', target.value);
+        operators(target.value);
+        displayInput();
         return;
     }
 

@@ -1,3 +1,10 @@
+const calculator = {
+    displayValue: '0',
+    firstOperand: null,
+    secondOperand: false,
+    operator: null,
+};
+
 function add(a, b) {
     return a + b;
 }
@@ -31,4 +38,9 @@ function operate(a, b, operator) {
         case '%': 
             return remainder(a, b);
     }
+}
+
+function displayInput() {
+    const display = document.querySelector('.calc-screen');
+    display.value = calculator.displayValue;
 }

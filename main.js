@@ -46,13 +46,19 @@ function displayInput() {
 }
 
 function digitInputs(digit) {
-    const displayValue = calculator.displayValue;
+    const { displayValue } = calculator;
     calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+}
+
+function addDecimal(period) {
+    if (!calculator.displayValue.includes(period)) {
+        calculator.displayValue += period;
+    }
 }
 
 const buttons = document.querySelector('.calc-buttons');
 buttons.addEventListener('click', (e) => {
-    const target = e.target;
+    const { target } = e;
 
     if (!target.matches('button')) {
         return;
@@ -64,7 +70,8 @@ buttons.addEventListener('click', (e) => {
     }
 
     if (target.classList.contains('decimal')) {
-        console.log('decimal', target.value);
+        addDecimal(target.value);
+        displayInput();
         return;
     }
 

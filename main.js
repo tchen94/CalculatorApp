@@ -70,6 +70,11 @@ function operators(nextOperation) {
     const { firstOperand, displayValue, operator } = calculator
     const input = parseFloat(displayValue);
 
+    if (operator && calculator.secondOperand) {
+        calculator.operator = nextOperation;
+        return;
+    }
+
     if (firstOperand === null && !isNaN(input)) {
         calculator.firstOperand = input;
     } else if (operator) {
@@ -81,6 +86,13 @@ function operators(nextOperation) {
 
     calculator.secondOperand = true;
     calculator.operator = nextOperation;
+}
+
+function clearEverything() {
+    calculator.displayValue = '0';
+    calculator.firstOperand = null;
+    calculator.secondOperand = false;
+    calculator.operator = null;
 }
 
 const buttons = document.querySelector('.calc-buttons');
@@ -104,7 +116,8 @@ buttons.addEventListener('click', (e) => {
     }
 
     if (target.classList.contains('clrbutton')) {
-        console.log('clear', target.value);
+        clearEverything();
+        displayInput();
         return;
     }
 

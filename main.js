@@ -61,6 +61,12 @@ function digitInputs(digit) {
 }
 
 function addDecimal(period) {
+    if (calculator.secondOperand === true) {
+        calculator.displayValue = "0.";
+        calculator.secondOperand = false;
+        return;
+    }
+
     if (!calculator.displayValue.includes(period)) {
         calculator.displayValue += period;
     }

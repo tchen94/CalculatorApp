@@ -44,14 +44,14 @@ button {
     font-weight: bold;
 }
 
-#calc-buttons {
+.calc-buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 2px;
     padding: 20px;
 }
 
-#clrbutton {
+.clrbutton {
     background-color: rgb(231, 120, 120);
 }
 

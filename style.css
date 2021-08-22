@@ -9,10 +9,23 @@ html {
     box-sizing: inherit;
 }
 
+body {
+    background-color: slategray;
+}
+
+.header {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-style: italic;
+    text-align: center;
+    color:rgb(101, 60, 117);
+    margin-top: 50px;
+}
+
 .calculator {
     background-color: darkgray;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    box-shadow: black;
+    border: 1px solid black;
+    border-radius: 10px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -39,8 +52,8 @@ html {
 button {
     height: 45px;
     background-color: rgb(40, 167, 167);
+    border-radius: 10px;
     color: white;
-    box-shadow: darkgray;
     font-weight: bold;
 }
 
@@ -61,4 +74,23 @@ button {
     grid-column-end: 5;
     background-color: rgb(124, 209, 167);
     font-size: 2rem;
+}
+.credentials {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.credentials a {
+    text-decoration: none;
+    color: black;
+    font-family: monospace;
+    font-size: 15px;
+    padding-left: 5px;
+    text-align: center;
 }

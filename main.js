@@ -56,8 +56,6 @@ function digitInputs(digit) {
     } else {
         calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
     }
-    
-    console.log(calculator);
 }
 
 function addDecimal(period) {
@@ -86,12 +84,17 @@ function operators(nextOperation) {
     } else if (operator) {
         const result = operate(firstOperand, input, operator);
 
-        calculator.displayValue = String(result);
+        calculator.displayValue = `${parseFloat(result.toFixed(7))}`;
         calculator.firstOperand = result;
     }
 
     calculator.secondOperand = true;
     calculator.operator = nextOperation;
+}
+
+function posMinSign() {
+    const negative = parseFloat(calculator.displayValue) * -1;
+    calculator.displayValue = negative.toString();
 }
 
 function clearEverything() {
@@ -102,31 +105,37 @@ function clearEverything() {
 }
 
 const buttons = document.querySelector('.calc-buttons');
+
 buttons.addEventListener('click', (e) => {
     const { target } = e;
+    const { value } = target;
 
     if (!target.matches('button')) {
         return;
     }
 
-    if (target.classList.contains('operator')) {
-        operators(target.value);
-        displayInput();
-        return;
+    switch(value) {
+        case "+":
+        case "-":
+        case "*":
+        case "/":
+        case "%":
+        case "=":
+            operators(value);
+            break;
+        case ".":
+            addDecimal(value);
+            break;
+        case "clear":
+            clearEverything();
+            break;
+        case "-1":
+            posMinSign();
+            break;
+        default:
+            if (Number.isInteger(parseFloat(value))) {
+                digitInputs(target.value);
+            }
     }
-
-    if (target.classList.contains('decimal')) {
-        addDecimal(target.value);
-        displayInput();
-        return;
-    }
-
-    if (target.classList.contains('clrbutton')) {
-        clearEverything();
-        displayInput();
-        return;
-    }
-
-    digitInputs(target.value);
     displayInput();
 })
